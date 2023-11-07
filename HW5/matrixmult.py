@@ -20,6 +20,7 @@
 
 from datetime import datetime
 import random
+import time
 
 def generateMatrix(szr,szc,num):
   data = []
@@ -65,29 +66,34 @@ if __name__=='__main__':
     for sz in size_rec:
       arr_many = generateMatrix(4*sz,sz,10)
       arr_many2 = generateMatrix(sz,sz//4,10)
-      start = datetime.now()
+      start = time.perf_counter()
       ans = matrix_mul(arr_many,arr_many2)
-      end = datetime.now()
-      data_many.append((end-start).total_seconds())
+      #end = datetime.now()
+      end = time.perf_counter()
+      data_many.append(end-start)
     printFloat(data_many)
     
     # case square
     for sz in size_rec:
       arr_moderate = generateMatrix(sz,sz,10)
       arr_moderate2 = generateMatrix(sz,sz,10)
-      start = datetime.now()
+      #start = datetime.now()
+      start = time.perf_counter()
       ans = matrix_mul(arr_moderate,arr_moderate2)
-      end = datetime.now()
-      data_square.append((end-start).total_seconds())
+      #end = datetime.now()
+      end = time.perf_counter()
+      data_square.append(end-start)
     printFloat(data_square)
     
     # case few
     for sz in size_rec:
       arr_rare = generateMatrix(sz//4,sz,10)
       arr_rare2 = generateMatrix(sz,sz*4,10)
-      start = datetime.now()
+      #start = datetime.now()
+      start = time.perf_counter()
       ans = matrix_mul(arr_rare,arr_rare2)
-      end = datetime.now()
-      data_few.append((end-start).total_seconds())
+      #end = datetime.now()
+      end = time.perf_counter()
+      data_few.append(end-start)
     printFloat(data_few)
       

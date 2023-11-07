@@ -114,13 +114,13 @@ def beststr(n):
         return 'b'
     return "".join([rndchr()]*n)
 
-def worststr(n):
-    def rndchr():
-        x=random.randrange(2)
-        if x==0:
-            return 'a'
-        return 'b'
-    return "".join([rndchr()]*n)
+# def worststr(n):
+#     def rndchr():
+#         x=random.randrange(2)
+#         if x==0:
+#             return 'a'
+#         return 'b'
+#     return "".join([rndchr()]*n)
 
 def worststr(n):
     x=random.randrange(2)
@@ -148,48 +148,35 @@ if __name__ == '__main__':
     
     data_best,data_worst,data_rnd = [],[],[]
     
-    
-        #no use , only to make time calculation correct
-    string=rndstr(data_size[0])
-    start=datetime.now()
-    ans=matching_length_sub_strs(string, c1, c2)
-    t=(datetime.now()-start).total_seconds()
-    
     #best
     for size in data_size:
         s_best = beststr(size)
-        start = datetime.now()
+        #start = datetime.now()
+        start = time.perf_counter()
         ans = matching_length_sub_strs(s_best,c1,c2)
-        end = datetime.now()
-        data_best.append((end-start).total_seconds())
+        #end = datetime.now()
+        end = time.perf_counter()
+        data_best.append(end-start)
     printFloat(data_best)
-    
-            #no use , only to make time calculation correct
-    string=rndstr(data_size[0])
-    start=datetime.now()
-    ans=matching_length_sub_strs(string, c1, c2)
-    t=(datetime.now()-start).total_seconds()
     
     #worst
     for size in data_size:
         s_worst = worststr(size)
-        start = datetime.now()
+        #start = datetime.now()
+        start = time.perf_counter()
         ans = matching_length_sub_strs(s_worst,c1,c2)
-        end = datetime.now()
-        data_worst.append((end-start).total_seconds())
+        #end = datetime.now()
+        end = time.perf_counter()
+        data_worst.append(end-start)
     printFloat(data_worst)
-    
-            #no use , only to make time calculation correct
-    string=rndstr(data_size[0])
-    start=datetime.now()
-    ans=matching_length_sub_strs(string, c1, c2)
-    t=(datetime.now()-start).total_seconds()
     
     #random
     for size in data_size:
         s_rnd = rndstr(size)
-        start = datetime.now()
+        #start = datetime.now()
+        start = time.perf_counter()
         ans = matching_length_sub_strs(s_rnd,c1,c2)
-        end = datetime.now()
-        data_rnd.append((end-start).total_seconds())
+        #end = datetime.now()
+        end = time.perf_counter()
+        data_rnd.append(end-start)
     printFloat(data_rnd)

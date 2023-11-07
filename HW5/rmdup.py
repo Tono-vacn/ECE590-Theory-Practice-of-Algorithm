@@ -5,6 +5,12 @@
 
 from datetime import datetime
 import random
+import time
+
+def printFloat(data):
+    for i in data:
+        print("%2.5f" %i,",",sep="",end="")
+    print()
 
 def generateArray(sz,num):
   data = []
@@ -37,30 +43,36 @@ if __name__=='__main__':
   # many duplicates
   for sz in size_rec:
     arr_many = generateArray(sz,sz/2048)
-    start = datetime.now()
+    #start = datetime.now()
+    start = time.perf_counter()
     ans = rmdup(arr_many)
-    end = datetime.now()
-    data_many.append((end-start).total_seconds())
-  print(data_many)
+    #end = datetime.now()
+    #start = time.perf_counter()
+    end = time.perf_counter()
+    data_many.append(end-start)
+  printFloat(data_many)
   
   #moderate duplicates
   for sz in size_rec:
     arr_moderate = generateArray(sz,sz/16)
-    start = datetime.now()
+    #start = datetime.now()
+    start = time.perf_counter()
     ans = rmdup(arr_moderate)
-    end = datetime.now()
-    data_moderate.append((end-start).total_seconds())
-  print(data_moderate)
+    #end = datetime.now()
+    end = time.perf_counter()
+    data_moderate.append(end-start)
+  printFloat(data_moderate)
   
   #rare duplicates
   for sz in size_rec:
     arr_rare = generateArray(sz,sz*4)
-    start = datetime.now()
+    #start = datetime.now()
+    start = time.perf_counter()
     ans = rmdup(arr_rare)
-    end = datetime.now()
-    data_rare.append((end-start).total_seconds())
-  print(data_rare)
-  
+    #end = datetime.now()
+    end = time.perf_counter()
+    data_rare.append(end-start)
+  printFloat(data_rare)  
 
 
 
