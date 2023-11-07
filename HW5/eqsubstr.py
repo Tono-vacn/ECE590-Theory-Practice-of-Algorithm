@@ -30,56 +30,45 @@ import time
 def printInt(data):
     for i in data:
         print("%7d" %i,",",sep="",end="")
-    print()
+
     
 def printFloat(data):
     for i in data:
         print("%2.5f" %i,",",sep="",end="")
-    print()
+
 
 def matching_length_sub_strs(s, c1, c2):
     dic_c1,dic_c2 = {},{}
     cnt1,cnt2=0,0
+    
+    def update_dict(dic, key, value):
+        if key in dic:
+            dic[key].append(value)
+        else:
+            dic[key] = [value]
+        
     for i in range(len(s)):
         if s[i]==c1:
             cnt1+=1
             if cnt2!=0:
-                if cnt2 in dic_c2:
-                    dic_c2[cnt2].append(i-cnt2)
-                else:
-                    dic_c2[cnt2]=[i-cnt2]
+                update_dict(dic_c2, cnt2, i-cnt2)
                 cnt2=0
         elif s[i]==c2:
             cnt2+=1
             if cnt1!=0:
-                if cnt1 in dic_c1:
-                    dic_c1[cnt1].append(i-cnt1)
-                else:
-                    dic_c1[cnt1]=[i-cnt1]
+                update_dict(dic_c1, cnt1, i-cnt1)
                 cnt1=0
         else:
             if cnt1!=0:
-                if cnt1 in dic_c1:
-                    dic_c1[cnt1].append(i-cnt1)
-                else:
-                    dic_c1[cnt1]=[i-cnt1]
+                update_dict(dic_c1, cnt1, i-cnt1)
                 cnt1=0
             if cnt2!=0:
-                if cnt2 in dic_c2:
-                    dic_c2[cnt2].append(i-cnt2)
-                else:
-                    dic_c2[cnt2]=[i-cnt2]
+                update_dict(dic_c2, cnt2, i-cnt2)
                 cnt2=0
     if cnt1!=0:
-        if cnt1 in dic_c1:
-            dic_c1[cnt1].append(len(s)-cnt1)
-        else:
-            dic_c1[cnt1]=[len(s)-cnt1]
+        update_dict(dic_c1, cnt1, len(s)-cnt1)
     if cnt2!=0:
-        if cnt2 in dic_c2:
-            dic_c2[cnt2].append(len(s)-cnt2)
-        else:
-            dic_c2[cnt2]=[len(s)-cnt2]
+        update_dict(dic_c2, cnt2, len(s)-cnt2)
     ans=set()
     for i in dic_c1:
         if i in dic_c2:
@@ -87,6 +76,7 @@ def matching_length_sub_strs(s, c1, c2):
                 for k in dic_c2[i]:
                     ans.add((j,k,i))
     
+    # print(ans)
     # WRITE ME
     return ans
 
@@ -114,13 +104,6 @@ def beststr(n):
         return 'b'
     return "".join([rndchr()]*n)
 
-# def worststr(n):
-#     def rndchr():
-#         x=random.randrange(2)
-#         if x==0:
-#             return 'a'
-#         return 'b'
-#     return "".join([rndchr()]*n)
 
 def worststr(n):
     x=random.randrange(2)
@@ -151,32 +134,35 @@ if __name__ == '__main__':
     #best
     for size in data_size:
         s_best = beststr(size)
-        #start = datetime.now()
         start = time.perf_counter()
         ans = matching_length_sub_strs(s_best,c1,c2)
-        #end = datetime.now()
         end = time.perf_counter()
         data_best.append(end-start)
     printFloat(data_best)
+    print()
     
-    #worst
+    # #worst
     for size in data_size:
         s_worst = worststr(size)
-        #start = datetime.now()
         start = time.perf_counter()
         ans = matching_length_sub_strs(s_worst,c1,c2)
-        #end = datetime.now()
         end = time.perf_counter()
         data_worst.append(end-start)
     printFloat(data_worst)
+    print()
     
     #random
     for size in data_size:
         s_rnd = rndstr(size)
-        #start = datetime.now()
         start = time.perf_counter()
         ans = matching_length_sub_strs(s_rnd,c1,c2)
-        #end = datetime.now()
         end = time.perf_counter()
         data_rnd.append(end-start)
     printFloat(data_rnd)
+    print()
+    
+    
+    s_rnd = rndstr(15)
+    ans = matching_length_sub_strs(s_rnd,c1,c2)
+    print(s_rnd)
+    print(ans)
