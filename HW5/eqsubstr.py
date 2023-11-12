@@ -102,7 +102,11 @@ def beststr(n):
         if x==0:
             return 'a'
         return 'b'
-    return "".join([rndchr()]*n)
+    lena = random.randrange(1,n+1)
+    ans = []
+    ans.extend([rndchr()]*lena)
+    ans.extend([rndchr()]*(n-lena))
+    return "".join(ans)
 
 
 def worststr(n):
