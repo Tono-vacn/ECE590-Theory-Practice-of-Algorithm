@@ -42,10 +42,7 @@ def buildTree(s,e,height):
     l,r = buildTree(s,i-1,height+1),buildTree(i+1,e,height+1)
     min_val = min(min_val,l[1]+r[1]+vl[i]*height)
     idx = i if min_val == l[1]+r[1]+vl[i]*height else idx
-  left = buildTree(s,idx-1,height+1)[0]
-  right = buildTree(idx+1,e,height+1)[0]
-  node_ = TreeNode(kl[idx],vl[idx],left,right)
-  return node_,min_val
+  return TreeNode(kl[idx],vl[idx],buildTree(s,idx-1,height+1)[0],buildTree(idx+1,e,height+1)[0]),min_val
 
 if __name__ == '__main__':
   #dickv = set()
@@ -65,12 +62,12 @@ if __name__ == '__main__':
   print(res[0])
   
   times=[]
-  for i in range(10):
+  for i in range(15):
       start = time.perf_counter()
       buildTree(0,len(kl)-1,1)
       end = time.perf_counter()
       buildTree.cache_clear()
       times.append(end-start)
-  print(int(sum(times)/10*pow(10,9)))
+  print(int(sum(times)/15*pow(10,9)))
   
   

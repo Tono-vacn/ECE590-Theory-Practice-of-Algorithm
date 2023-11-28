@@ -23,22 +23,22 @@ def matcal(s,e):
 
 if __name__ == '__main__':
 
-  # grid = []
-  # with open(sys.argv[1]) as f:
-  #   for line in f.readlines():
-  #     grid.append([val for val in line.strip().split(',')])
+  grid = []
+  with open(sys.argv[1]) as f:
+    for line in f.readlines():
+      grid.append([val for val in line.strip().split(',')])
   #grid = [['A', 10, 20], ['B', 20, 30], ['C', 30, 40], ['D', 40, 30]]
   # grid = [['A',7,3],
   # ['B',3,5],
   # ['C',5,4]]
   
   
-  grid = [  ['A',40,20],
-  ['B',20,30],
-  ['C',30,10],
-  ['D',10,30]]
+  # grid = [  ['A',40,20],
+  # ['B',20,30],
+  # ['C',30,10],
+  # ['D',10,30]]
   
-  print(grid)
+  # print(grid)
   mat = [line[0] for line in grid]
   l = len(mat)
   size = [int(grid[0][1])]
@@ -57,20 +57,14 @@ if __name__ == '__main__':
     op_num,c = matcal(0,l-1)
     e = time.perf_counter()
     time_rec.append(e-s)
-    #getCoin.cache_clear()
+    matcal.cache_clear()
+    
+  # for val in time_rec:
+  #   print(val*pow(10,9))
   
-  # i,j = 0,0
-  # while ways[i][j]!=0 and i<h and j <w:
-  #   if ways[i][j] == 1:
-  #     direction.append('N')
-  #     i += 1
-  #   else:
-  #     direction.append('W')
-  #     j += 1
-  # direction.reverse()
-  # print(''.join(direction))
-  # print(coin_num)
-  # print(int(sum(time_rec)/10*pow(10,9)))
+  #print(time_rec)
+  print(int(sum(time_rec)/15*pow(10,9)))
+  
     
     
 
